@@ -21,6 +21,8 @@ function parseCurrency(value: number): string {
 const IndexRoute: React.FC<Props> = ({products}) => {
 
   const [cart, setCart] = React.useState<Product[]>([]);
+
+  const [optionSelected, setOptionSelected] = React.useState<string>('Null');
   
   const text = React.useMemo(
     () => 
@@ -39,7 +41,7 @@ const IndexRoute: React.FC<Props> = ({products}) => {
   <Stack spacing={6}>
     <Grid gridGap={6} templateColumns="repeat(auto-fill, minmax(240px, 1fr))">
     {products.map((product) => (
-      <Stack spacing={3} borderRadius={"md"} padding={4} backgroundColor="gray.200" key={product.id}>
+      <Stack spacing={3} borderRadius={"md"} padding={4} backgroundColor="gray.200" key={product.id} >
 
         <Image borderRadius={"md"} maxH={128} objectFit="cover" src={product.image} alt="product"/>
 
@@ -59,17 +61,15 @@ const IndexRoute: React.FC<Props> = ({products}) => {
                   w={"fit-content"}
                   h={"fit-content"}
                   fontSize={"sm"}
-                  
+                  isRequired = {true}
                   >
               <option value='option1'>0.5 Kg</option>
               <option value='option2'>1 Kg</option>
               <option value='option3'>2 Kg</option>
               <option value='option3'>3 Kg</option> 
-              <option value='option3'>4 Kg</option>       
-
-
-          </Select>        
-                  
+              <option value='option3'>4 Kg</option>     
+          </Select>   
+          
           </Stack>
         </Stack>
 
