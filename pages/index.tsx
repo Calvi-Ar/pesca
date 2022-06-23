@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetStaticProps } from "next";
-import { Button, Grid, Link, Stack, Text, Flex, Image } from '@chakra-ui/react';
+import { Button, Grid, Link, Stack, Text, Flex, Image, Select } from '@chakra-ui/react';
 import { Product } from "../product/types";
 import api from '../product/api';
 
@@ -44,8 +44,33 @@ const IndexRoute: React.FC<Props> = ({products}) => {
         <Image borderRadius={"md"} maxH={128} objectFit="cover" src={product.image} alt="product"/>
 
         <Stack spacing={1}>
-          <Text>{product.title}</Text>
-          <Text fontWeight={500} fontSize={"sm"} color={"green.400"}>{parseCurrency(product.price)}</Text>
+          <Text fontWeight={500} fontSize={"md"}>{product.title}</Text>
+
+
+          <Stack direction={"row"} justifyContent={"space-between"}>
+          
+          <Text fontWeight={500} fontSize={"sm"} color={"green.400"}>{parseCurrency(product.price)} {product.description}</Text>
+          
+          <Select justifyContent={"center"}
+                  bg='primary'
+                  borderColor='primary'
+                  color='primary'
+                  placeholder='Cantidad'
+                  w={"fit-content"}
+                  h={"fit-content"}
+                  fontSize={"sm"}
+                  
+                  >
+              <option value='option1'>0.5 Kg</option>
+              <option value='option2'>1 Kg</option>
+              <option value='option3'>2 Kg</option>
+              <option value='option3'>3 Kg</option> 
+              <option value='option3'>4 Kg</option>       
+
+
+          </Select>        
+                  
+          </Stack>
         </Stack>
 
         <Button variant={"outline"} size={"sm"} onClick={() => setCart(cart => cart.concat(product))} colorScheme="primary">Agregar</Button>
