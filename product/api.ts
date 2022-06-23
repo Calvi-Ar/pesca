@@ -9,7 +9,7 @@ export default {
         .get(
             `https://docs.google.com/spreadsheets/d/e/2PACX-1vShqeD_Dcf4KfgirDe_0tRvTVFo4SAT0BdYAFC6wlCWGhtG0LBzWOjLg1pd2NTzUA_p1unNvJy1YI9y/pub?output=csv`,
         {
-            responseType: 'blob',
+            responseType: "blob",
         },
         )
         .then( 
@@ -18,7 +18,13 @@ export default {
                 
                 Papa.parse(response.data, {
                     header: true,
-                    complete: (results) => resolve(results.data as Product[]),
+                    complete: (results) => {
+                        const products = results.data as Product[];
+                        return resolve(products.map( product => ({
+                            ...product,
+                            price: Number(product.price)
+                        })))
+                    },
                     
                     error: (error) => reject (error.message),   
                 });
